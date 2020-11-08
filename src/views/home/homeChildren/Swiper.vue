@@ -1,22 +1,14 @@
 <template>
   <div class="swiper">
     <ul class="swiper-item">
-      <li v-for="item in banners">
+      <li v-for="(item,index) in banners" :key="index" v-show="index===mark">
         <a :href="item.link">
-          <img :src="item.image" alt="">
-        </a>
-      </li>
-      <li>
-        <a href="https://act.mogujie.com/huanxin0001?acm=3.mce.2_10_1jhwa.43542.0.ccy5br4OlfK0Q.pos_0-m_454801-sd_119">
-          <img src="../../../assets/img/home/swiper.jpg" alt="">
+          <img :src="item.image" alt="" @load="imgLoad">
         </a>
       </li>
     </ul>
     <ul class="swiper-index">
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
+      <li v-for="(item,index) in banners" :key="index" :class="{'curr':index===mark}"></li>
     </ul>
   </div>
 </template>
@@ -30,9 +22,10 @@
       return {
         banners: [],
         recommends: [],
-        index: 0,
+        mark: 0,
         speed: 10,
-        num: 0
+        num: 0,
+        isLoad: false
       }
     },
     created() {
@@ -40,50 +33,24 @@
         this.banners = res.data.data.banner.list
         this.recommends = res.data.data.recommend.list
       })
-    },
-    mounted: function() {
-      setTimeout(() => {
-        this.startTimer()
-      },1000)
+      this.auto()
     },
     methods: {
-      startTimer: function() {
-        let item = document.querySelector('.swiper-item')
-        let guide = document.querySelectorAll('.swiper-index>li')
-
-        let timer = setInterval(() => {
-          this.index--
-
-          if(this.index === -1400) {
-            this.index = -1
+      auto() {
+        setInterval(() => {
+          this.mark++
+          if(this.mark === 4) {
+            this.mark = 0
           }
-
-          if(this.index % -350 === 0) {
-
-          }
-
-          this.num = Math.abs(Math.floor(this.index / 350))-1
-
-          for (let i=0; i<guide.length; i++) {
-            guide[i].className = ''
-          }
-
-          guide[this.num].className = 'bg'
-          item.style.marginLeft = this.index+'px'
-        },this.speed)
-
-        let navBar = document.querySelector('.nav-bar')
-
-        window.onscroll = function () {
-          let scroll = document.documentElement.scrollTop||document.body.scrollTop;
-          if(parseInt(scroll) >= 90) {
-            navBar.style.backgroundColor = '#E43130'
-          } else {
-            navBar.style.backgroundColor = ''
-          }
+        },2000)
+      },
+      imgLoad() {
+        if(!this.isLoad) {
+          this.$emit('swiperImgLoad')
+          this.isLoad = true
         }
       }
-    }
+    },
   }
 </script>
 
@@ -95,7 +62,7 @@
     border-radius: 10px;
     position: relative;
     left: 12px;
-    top: 45px;
+    top: 0;
   }
   .swiper .swiper-item {
     width: 1750px;
@@ -132,7 +99,7 @@
     background-color: #fff;
     margin: 0 2px;
   }
-  .bg {
+  .curr {
     background-color: red !important;
   }
 </style>

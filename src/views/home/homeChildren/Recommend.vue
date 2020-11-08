@@ -1,7 +1,14 @@
 <template>
   <div class="recommend">
-    <div class="floor">
-      <a href="" v-for="item in recommend">
+    <div class="floorOne" :class="{zIndex:num===0}">
+      <a href="" v-for="item in recommendTwo">
+        <img :src="item.url" alt="">
+        <span>{{item.name}}</span>
+      </a>
+    </div>
+
+    <div class="floorTwo">
+      <a href="" v-for="item in recommendOne" :class="{zIndex:num===1}">
         <img :src="item.url" alt="">
         <span>{{item.name}}</span>
       </a>
@@ -9,8 +16,7 @@
 
     <div class="page">
       <ul>
-        <li style="background-color: #FA2C19;" class="one" @click="firstPage"></li>
-        <li class="two" @click="lastPage"></li>
+        <li v-for="(item,index) in 2" :class="{bgc:num===index}" @click="toggle(index)"></li>
       </ul>
     </div>
   </div>
@@ -21,7 +27,7 @@
     name: "Recommend",
     data() {
       return {
-        recommend: [
+        recommendOne: [
           {
             url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/125678/35/5947/4868/5efbf28cEbf04a25a/e2bcc411170524f0.png.webp',
             name: '京东超市'
@@ -43,26 +49,6 @@
             name: '京东到家'
           },
           {
-            url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/142596/7/1864/4759/5efbf5a9E60c62b8a/49cdd24cb2bfecf5.png.webp',
-            name: '京东国际'
-          },
-          {
-            url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/125193/15/5993/3443/5efbf5dbEa3327124/a4282d5cb2879c8b.png.webp',
-            name: '京东拍卖'
-          },
-          {
-            url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/133947/24/3428/4213/5efbf625E7e1b4e98/95fda84d8748f88d.png.webp',
-            name: '唯品会'
-          },
-          {
-            url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/145692/9/1817/4493/5efbf652E61c4f3ec/722840c121d67fc6.png.webp',
-            name: '玩3C'
-          },
-          {
-            url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/118396/30/11271/2692/5efbf680Eb3a3cf32/c3e85c4d99746400.png.webp',
-            name: '沃尔玛'
-          },
-          {
             url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/146390/3/1846/4909/5efbf39aEe5f5f797/300071558a9ab078.png.webp',
             name: '充值缴费'
           },
@@ -81,6 +67,28 @@
           {
             url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/123730/37/5924/4189/5efbf567E0a226121/d04df7c74c87cf68.png.webp',
             name: 'PLUS会员'
+          },
+        ],
+        recommendTwo: [
+          {
+            url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/142596/7/1864/4759/5efbf5a9E60c62b8a/49cdd24cb2bfecf5.png.webp',
+            name: '京东国际'
+          },
+          {
+            url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/125193/15/5993/3443/5efbf5dbEa3327124/a4282d5cb2879c8b.png.webp',
+            name: '京东拍卖'
+          },
+          {
+            url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/133947/24/3428/4213/5efbf625E7e1b4e98/95fda84d8748f88d.png.webp',
+            name: '唯品会'
+          },
+          {
+            url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/145692/9/1817/4493/5efbf652E61c4f3ec/722840c121d67fc6.png.webp',
+            name: '玩3C'
+          },
+          {
+            url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/118396/30/11271/2692/5efbf680Eb3a3cf32/c3e85c4d99746400.png.webp',
+            name: '沃尔玛'
           },
           {
             url: 'https://m.360buyimg.com/mobilecms/s120x120_jfs/t1/123571/19/6008/3747/5efbf6b2E03153a36/9ddc9036ba1c11a1.png.webp',
@@ -107,55 +115,15 @@
       }
     },
     methods: {
-      lastPage() {
-        let floor = document.querySelector('.floor')
-        let one = document.querySelector('.one')
-        let two = document.querySelector('.two')
-        one.style.backgroundColor = 'white'
-        two.style.backgroundColor = 'white'
-        two.style.backgroundColor = '#FA2C19'
-        let lastTimer = setInterval(() => {
-          this.num--
-          if(this.num <= -375) {
-            clearInterval(lastTimer)
-          }
-          floor.style.left = this.num+'px'
-        },1)
-      },
-      firstPage() {
-        let floor = document.querySelector('.floor')
-        let one = document.querySelector('.one')
-        let two = document.querySelector('.two')
-        one.style.backgroundColor = 'white'
-        two.style.backgroundColor = 'white'
-        one.style.backgroundColor = '#FA2C19'
-        let firstTimer =  setInterval(() => {
-          this.num++
-          if(this.num >= 0) {
-            clearInterval(firstTimer)
-          }
-          floor.style.left = this.num+'px'
-        },1)
+      toggle(index) {
+        this.num = index
       }
     }
   }
 </script>
 
 <style scoped>
-  .recommend {
-    width: 100%;
-    height: 162px;
-    position: relative;
-    overflow: hidden;
-  }
-  .floor {
-    width: 750px;
-    height: 162px;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-  .floor a {
+  a {
     width: 74px;
     height: 74px;
     display: block;
@@ -163,12 +131,29 @@
     font-size: 12px;
     text-align: center;
   }
-  .floor img {
+  img {
     width: 40px;
     height: 40px;
     display: block;
     margin: 10px 0 6px 18px;
   }
+  .recommend {
+    width: 100%;
+    height: 162px;
+    position: relative;
+    overflow: hidden;
+  }
+  .floorOne,.floorTwo {
+    width: 100%;
+    height: 162px;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .zIndex {
+    display: none;
+  }
+
   .page {
     width: 375px;
     height: 8px;
@@ -192,5 +177,8 @@
     background-color: #fff;
     border-radius: 50%;
     margin-right: 5px;
+  }
+  .bgc {
+    background-color: #FA2C19 !important;
   }
 </style>
