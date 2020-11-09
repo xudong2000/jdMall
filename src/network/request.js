@@ -17,7 +17,7 @@ export function request(config) {
 
   // axios的响应拦截器
   instance.interceptors.response.use(res => {
-    console.log(res)
+    //console.log(res)
     return res
   },err => {
     console.log(err);

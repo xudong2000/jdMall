@@ -69,7 +69,6 @@
   .container {
     width: 100%;
     height: 115px;
-    margin-top: 50px;
     display: flex;
   }
   .container-l,.container-r {

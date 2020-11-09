@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view v-slot="{ Component }">
-      <keep-alive>
+      <keep-alive exclude="detail">
         <component :is="Component" />
       </keep-alive>
     </router-view>
@@ -11,15 +11,11 @@
 
 <script>
   import MainTabBar from "./components/content/mainTabbar/MainTabBar"
-  import NavBar from "./components/common/navbar/NavBar"
-  import NavBarItem from "./components/common/navbar/NavBarItem"
 
   export default {
     name: 'App',
     components: {
-      MainTabBar,
-      NavBar,
-      NavBarItem
+      MainTabBar
     }
   }
 </script>

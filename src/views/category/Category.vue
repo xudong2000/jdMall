@@ -11,5 +11,9 @@
 </script>
 
 <style scoped>
-
+  .wrapper {
+    height: 200px;
+    background-color: pink;
+    overflow: hidden;
+  }
 </style>

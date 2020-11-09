@@ -5,3 +5,4 @@ export function getHomeMultiData() {
     url: '/home/multidata'
   })
 }
+
