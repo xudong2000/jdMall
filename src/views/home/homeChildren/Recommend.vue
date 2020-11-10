@@ -1,14 +1,14 @@
 <template>
   <div class="recommend">
     <div class="floorOne" :class="{zIndex:num===0}">
-      <a href="" v-for="item in recommendTwo">
+      <a href="javascript:;" v-for="(item,index) in recommendTwo" :key="index">
         <img :src="item.url" alt="">
         <span>{{item.name}}</span>
       </a>
     </div>
 
-    <div class="floorTwo">
-      <a href="" v-for="item in recommendOne" :class="{zIndex:num===1}">
+    <div class="floorTwo" :class="{zIndex:num===1}">
+      <a href="javascript:;" v-for="(item,index) in recommendOne" :key="index">
         <img :src="item.url" alt="">
         <span>{{item.name}}</span>
       </a>
@@ -16,7 +16,7 @@
 
     <div class="page">
       <ul>
-        <li v-for="(item,index) in 2" :class="{bgc:num===index}" @click="toggle(index)"></li>
+        <li v-for="(item,index) in 2" :key="index" :class="{bgc:num===index}" @click="toggle(index)"></li>
       </ul>
     </div>
   </div>
