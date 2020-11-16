@@ -16,7 +16,7 @@
     </div>
 
     <div class="addCart">
-      <span>加入购物车</span>
+      <span @click="addToCart">加入购物车</span>
     </div>
 
     <div class="buyNow">
@@ -27,7 +27,13 @@
 
 <script>
   export default {
-    name: "DetailBottomBar"
+    name: "DetailBottomBar",
+    methods: {
+      addToCart() {
+        console.log('已添加到购物车')
+        this.$emit('addCart')
+      }
+    },
   }
 </script>
 

@@ -122,7 +122,8 @@ export default createStore({
     // 保存当前商品类型的数据
     currType: '',
     // 保存当前商品的id
-    currItem: ''
+    currItem: '',
+    arr: []
   },
   mutations: {
   },

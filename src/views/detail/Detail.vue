@@ -80,7 +80,7 @@
       </template>
     </scroll>
 
-    <detail-bottom-bar/>
+    <detail-bottom-bar @addCart="addToCart"/>
   </div>
 </template>
 
@@ -103,7 +103,7 @@
     },
     methods: {
       detailScroll(position) {
-        console.log((-position))
+        //console.log((-position))
         this.isShowDetail = (-position) > 1
 
         if((-position) < 950) {
@@ -115,6 +115,12 @@
         } else if((-position) >= 2345) {
           this.$refs.detail.currentIndex = 3
         }
+      },
+      addToCart() {
+        console.log(this.$store.state.currItem);
+        console.log(this.$store.state.currType);
+        this.$store.state.arr.push(this.$store.state.currItem)
+        console.log(this.$store.state.arr);
       }
     }
   }
